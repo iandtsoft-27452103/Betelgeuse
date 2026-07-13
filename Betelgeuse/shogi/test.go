@@ -5,7 +5,9 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"log"
 	"os"
+	"os/exec"
 	"strconv"
 )
 
@@ -912,4 +914,80 @@ func VerifyBoard(bt_before BoardTree, bt_after BoardTree) bool {
 		return true
 	}
 	return false
+}
+
+// Created by Copilot
+func TestCommunicatePython() {
+	var cmd = exec.Command("python", "-u", "python0/Gift.py")
+	stdin, err := cmd.StdinPipe()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	/*stderr, err := cmd.StderrPipe()
+	if err != nil {
+		fmt.Println("stderr pipe error:", err)
+		return
+	}*/
+	//scanner := bufio.NewScanner(stdout)
+
+	reader := bufio.NewReader(stdout)
+
+	//reader.Peek(1)
+
+	if err := cmd.Start(); err != nil {
+		log.Fatal(err)
+	}
+
+	/*var wg sync.WaitGroup
+	wg.Add(2)
+
+	// stdout ログ読み取り (非同期)
+	go func() {
+		defer wg.Done()
+		scanner := bufio.NewScanner(stdout)
+		for scanner.Scan() {
+			fmt.Println("[PY-OUT]", scanner.Text())
+		}
+	}()
+
+	// stderr ログ読み取り (非同期)
+	go func() {
+		defer wg.Done()
+		scanner := bufio.NewScanner(stderr)
+		for scanner.Scan() {
+			fmt.Println("[PY-ERR]", scanner.Text())
+		}
+	}()
+
+	// ログ reader の終了待機
+	wg.Wait()
+
+	// コマンド終了待機
+	if err := cmd.Wait(); err != nil {
+		fmt.Println("python exited with error:", err)
+		return
+	}*/
+
+	fmt.Println("Python model executed successfully.")
+
+	// Python に送信
+	fmt.Fprintln(stdin, "Hello from Go")
+
+	// Python から受信
+	resp, _ := reader.ReadString('\n')
+	fmt.Println("Response:", resp)
+
+	//reader.Discard(len(resp))
+
+	resp, _ = reader.ReadString('\n')
+	fmt.Println("Response:", resp)
+
+	resp, _ = reader.ReadString('\n')
+	fmt.Println("Response:", resp)
 }

@@ -121,18 +121,18 @@ func Offend(mst *MateSearchTree, color int, rest_depth int, ply int) bool {
 		}
 		mst.move_cur[ply] = checkMoves[i]
 
-		if ply == 3 && mst.move_cur[1] == 174746 && mst.move_cur[2] == 4291562639 && rest_depth >= 1 {
+		/*if ply == 3 && mst.move_cur[1] == 174746 && mst.move_cur[2] == 4291562639 && rest_depth >= 1 {
 			fmt.Println("aa")
-		}
+		}*/
 
 		if PieceType(mst.move_cur[ply]) == uint32(Empty) {
 			continue
 		}
 		Do(&mst.bt, mst.move_cur[ply], color)
 
-		if mst.bt.SQ_King[0] != 0 {
+		/*if mst.bt.SQ_King[0] != 0 {
 			fmt.Println("aa")
-		}
+		}*/
 
 		// Sometimes, this problem occurs. I don't know what this causes.
 		if BBTest(IsAttacked(mst.bt, int(mst.bt.SQ_King[color^1]), color^1)) == 0 {
@@ -166,9 +166,9 @@ func Defend(mst *MateSearchTree, color int, rest_depth int, ply int) bool {
 	var mate_count int
 	var evasionMoves []uint32 = make([]uint32, 0)
 
-	if ply == 2 && mst.move_cur[1] == 174746 && rest_depth >= 1 {
+	/*if ply == 2 && mst.move_cur[1] == 174746 && rest_depth >= 1 {
 		fmt.Println("aa")
-	}
+	}*/
 
 	if mst.is_abort {
 		return false
@@ -188,15 +188,15 @@ func Defend(mst *MateSearchTree, color int, rest_depth int, ply int) bool {
 		}
 		mst.move_cur[ply] = evasionMoves[i]
 
-		if ply == 2 && mst.move_cur[1] == 174746 && mst.move_cur[2] == 4291562639 && rest_depth >= 0 {
+		/*if ply == 2 && mst.move_cur[1] == 174746 && mst.move_cur[2] == 4291562639 && rest_depth >= 0 {
 			fmt.Println("aa")
-		}
+		}*/
 
 		Do(&mst.bt, mst.move_cur[ply], color)
 
-		if mst.bt.SQ_King[0] != 0 {
+		/*if mst.bt.SQ_King[0] != 0 {
 			fmt.Println("aa")
-		}
+		}*/
 
 		// case of discovered check
 		if BBTest(IsAttacked(mst.bt, int(mst.bt.SQ_King[color]), color)) != 0 {

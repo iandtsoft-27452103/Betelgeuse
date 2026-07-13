@@ -338,6 +338,7 @@ type BoardTree struct {
 	Hand        [Color_NB]uint32
 	Board       [Square_NB]int8
 	RootColor   uint8
+	RootMoves   []uint32
 	Hash        [Ply_Max]uint64
 	CurrentHash uint64
 	PrevHash    uint64
@@ -372,6 +373,10 @@ type TT struct {
 	is_check map[uint64]bool
 	move     map[uint64]uint32
 	ply      map[uint64]uint16
+}
+
+type TT2 struct {
+	value map[uint64]float32
 }
 
 type MateSearchTree struct {
