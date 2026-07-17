@@ -1,0 +1,1 @@
+Betelgeuse.exe 8 2 10 9 analyze_result.txt 20220403_nhk_hai.txt 2022/04/03 ‘æ72‰ñNHK”t –Ø‘ºˆêŠî‹ã’i •“c‹Ä”VŒÜ’i
